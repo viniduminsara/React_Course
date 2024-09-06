@@ -1,4 +1,5 @@
 import reactImage from './assets/react-core-concepts.png'
+import componentImage from './assets/components.png'
 
 function App() {
 
@@ -23,11 +24,46 @@ function App() {
         )
     }
 
+    const CoreConcept = (props) => {
+
+        return (
+            <li>
+                <img src={props.image} alt="image"/>
+                <h3>{props.title}</h3>
+                <p>{props.description}</p>
+            </li>
+        )
+    }
+
     return (
         <div>
             <Header/>
             <main>
-                <h2>Time to get started!</h2>
+                <section id='core-concepts'>
+                    <h2>Core Concepts</h2>
+                    <ul>
+                        <CoreConcept
+                            title='Components'
+                            description='The core UI building block.'
+                            image={componentImage}
+                        />
+                        <CoreConcept
+                            title='Components'
+                            description='The core UI building block.'
+                            image={componentImage}
+                        />
+                        <CoreConcept
+                            title='Components'
+                            description='The core UI building block.'
+                            image={componentImage}
+                        />
+                        <CoreConcept
+                            title='Components'
+                            description='The core UI building block.'
+                            image={componentImage}
+                        />
+                    </ul>
+                </section>
             </main>
         </div>
     );
