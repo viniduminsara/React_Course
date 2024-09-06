@@ -1,3 +1,4 @@
+import {CORE_CONCEPTS} from './data'
 import reactImage from './assets/react-core-concepts.png'
 import componentImage from './assets/components.png'
 
@@ -24,13 +25,13 @@ function App() {
         )
     }
 
-    const CoreConcept = (props) => {
+    const CoreConcept = ({image, title, description}) => {
 
         return (
             <li>
-                <img src={props.image} alt="image"/>
-                <h3>{props.title}</h3>
-                <p>{props.description}</p>
+                <img src={image} alt="image"/>
+                <h3>{title}</h3>
+                <p>{description}</p>
             </li>
         )
     }
@@ -42,26 +43,10 @@ function App() {
                 <section id='core-concepts'>
                     <h2>Core Concepts</h2>
                     <ul>
-                        <CoreConcept
-                            title='Components'
-                            description='The core UI building block.'
-                            image={componentImage}
-                        />
-                        <CoreConcept
-                            title='Components'
-                            description='The core UI building block.'
-                            image={componentImage}
-                        />
-                        <CoreConcept
-                            title='Components'
-                            description='The core UI building block.'
-                            image={componentImage}
-                        />
-                        <CoreConcept
-                            title='Components'
-                            description='The core UI building block.'
-                            image={componentImage}
-                        />
+                        <CoreConcept {...CORE_CONCEPTS[0]}/>
+                        <CoreConcept {...CORE_CONCEPTS[1]}/>
+                        <CoreConcept {...CORE_CONCEPTS[2]}/>
+                        <CoreConcept {...CORE_CONCEPTS[3]}/>
                     </ul>
                 </section>
             </main>
