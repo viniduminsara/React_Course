@@ -3,6 +3,7 @@ import Header from "./components/Header/Header";
 import CoreConcept from "./components/CoreConcept/CoreConcept";
 import TabButton from "./components/TabButton";
 import {useState} from "react";
+import coreConcept from "./components/CoreConcept/CoreConcept";
 
 function App() {
 
@@ -19,10 +20,9 @@ function App() {
                 <section id='core-concepts'>
                     <h2>Core Concepts</h2>
                     <ul>
-                        <CoreConcept {...CORE_CONCEPTS[0]}/>
-                        <CoreConcept {...CORE_CONCEPTS[1]}/>
-                        <CoreConcept {...CORE_CONCEPTS[2]}/>
-                        <CoreConcept {...CORE_CONCEPTS[3]}/>
+                        {CORE_CONCEPTS.map(coreConcept => (
+                            <CoreConcept {...coreConcept}/>
+                        ))}
                     </ul>
                 </section>
                 <section id='examples'>
