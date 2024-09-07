@@ -2,6 +2,7 @@ import Player from "./components/Player.jsx";
 import GameBoard from "./components/GameBoard.jsx";
 import {useState} from "react";
 import Log from "./components/Log.jsx";
+import {WINNING_COMBINATIONS} from "./winning-combinations.js";
 
 function findActivePlayer(gameTurns) {
     let currentPlayer = 'X';
@@ -12,10 +13,37 @@ function findActivePlayer(gameTurns) {
     return currentPlayer;
 }
 
+const initialGameBoard = [
+    [null, null, null],
+    [null, null, null],
+    [null, null, null],
+];
+
 function App() {
 
     const [ gameTurns, setGameTurns ] = useState([]);
     const activePlayer = findActivePlayer(gameTurns);
+
+    let gameBoard = initialGameBoard;
+
+    for (const turn of gameTurns) {
+        const { square, player } = turn;
+        const { row, col } = square;
+
+        gameBoard[row][col] = player;
+    }
+
+    let winner;
+
+    for (const combination of WINNING_COMBINATIONS){
+        const first = gameBoard[combination[0].row][combination[0].column];
+        const second = gameBoard[combination[1].row][combination[1].column];
+        const third = gameBoard[combination[2].row][combination[2].column];
+
+        if (first && first === second && first === third){
+            winner = first;
+        }
+    }
 
     function handlePlayerShift(rowIndex, colIndex){
         setGameTurns(prevTurns => {
@@ -31,7 +59,8 @@ function App() {
                     <Player name='Player 1' symbol='X' isActive={activePlayer === 'X'}/>
                     <Player name='Player 2' symbol='O' isActive={activePlayer === 'O'}/>
                 </ol>
-                <GameBoard onPlayerShift={handlePlayerShift} turns={gameTurns}/>
+                {winner && <p>You won, {winner}</p>}
+                <GameBoard onPlayerShift={handlePlayerShift} board={gameBoard}/>
             </div>
             <Log turns={gameTurns}/>
         </main>
