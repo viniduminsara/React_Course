@@ -1,19 +1,32 @@
-const GameBoard = () => {
+import {useState} from "react";
 
-    const initialGameBoard = [
-        [null, null, null],
-        [null, null, null],
-        [null, null, null],
-    ];
+const initialGameBoard = [
+    [null, null, null],
+    [null, null, null],
+    [null, null, null],
+];
+
+const GameBoard = ({ onPlayerShift, activePlayerSymbol }) => {
+
+    const [ gameBoard, setGameBoard ] = useState(initialGameBoard);
+
+    function handleMove(rowIndex, colIndex) {
+        setGameBoard((prevGameBoard) => {
+            const tempBoard = [...prevGameBoard.map(innerArray => [...innerArray])];
+            tempBoard[rowIndex][colIndex] = activePlayerSymbol;
+            return tempBoard;
+        });
+        onPlayerShift();
+    }
 
     return (
         <ol id='game-board'>
-            {initialGameBoard.map((row, index) =>
-                <li key={index}>
+            {gameBoard.map((row, rowIndex) =>
+                <li key={rowIndex}>
                     <ol>
-                        {row.map((col, index) =>
-                            <li key={index}>
-                                <button>{col}</button>
+                        {row.map((col, colIndex) =>
+                            <li key={colIndex}>
+                                <button onClick={() => handleMove(rowIndex, colIndex)}>{col}</button>
                             </li>
                         )}
                     </ol>
