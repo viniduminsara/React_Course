@@ -6,18 +6,27 @@ const initialGameBoard = [
     [null, null, null],
 ];
 
-const GameBoard = ({ onPlayerShift, activePlayerSymbol }) => {
+const GameBoard = ({ onPlayerShift, turns }) => {
 
-    const [ gameBoard, setGameBoard ] = useState(initialGameBoard);
+    let gameBoard = initialGameBoard;
 
-    function handleMove(rowIndex, colIndex) {
-        setGameBoard((prevGameBoard) => {
-            const tempBoard = [...prevGameBoard.map(innerArray => [...innerArray])];
-            tempBoard[rowIndex][colIndex] = activePlayerSymbol;
-            return tempBoard;
-        });
-        onPlayerShift();
+    for (const turn of turns) {
+        const { square, player } = turn;
+        const { row, col } = square;
+
+        gameBoard[row][col] = player;
     }
+
+    // const [ gameBoard, setGameBoard ] = useState(initialGameBoard);
+    //
+    // function handleMove(rowIndex, colIndex) {
+    //     setGameBoard((prevGameBoard) => {
+    //         const tempBoard = [...prevGameBoard.map(innerArray => [...innerArray])];
+    //         tempBoard[rowIndex][colIndex] = activePlayerSymbol;
+    //         return tempBoard;
+    //     });
+    //     onPlayerShift();
+    // }
 
     return (
         <ol id='game-board'>
@@ -26,7 +35,7 @@ const GameBoard = ({ onPlayerShift, activePlayerSymbol }) => {
                     <ol>
                         {row.map((col, colIndex) =>
                             <li key={colIndex}>
-                                <button onClick={() => handleMove(rowIndex, colIndex)}>{col}</button>
+                                <button onClick={() => onPlayerShift(rowIndex, colIndex)}>{col}</button>
                             </li>
                         )}
                     </ol>
