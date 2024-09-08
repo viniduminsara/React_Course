@@ -4,10 +4,11 @@ export default function Player() {
   const playerName = useRef();
 
   const [enteredPlayerName, setEnteredPlayerName] = useState(null);
-  
+
   // with ref we can use the underline connected element to 'playerName, and get the value of the input
   function handleClick() {
     setEnteredPlayerName(playerName.current.value);
+    playerName.current.value = '';
   }
 
   return (
