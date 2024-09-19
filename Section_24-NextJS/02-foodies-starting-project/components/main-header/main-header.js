@@ -14,7 +14,7 @@ export default function MainHeader() {
         <>
             <MainHeaderBackground/>
             <header className={classes.header}>
-                <Link href='/Section_24-NextJS/02-foodies-starting-project/public' className={classes.logo}>
+                <Link href='/' className={classes.logo}>
                     <Image src={logoImage} alt="logo"/>
                     NextLevel Food
                 </Link>
